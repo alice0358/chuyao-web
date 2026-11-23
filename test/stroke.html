@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&display=swap">
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;height:100%;background:#1d2a33;color:#fff8e8;font-family:"LXGW WenKai TC",serif;overflow:hidden;user-select:none;-webkit-user-select:none}
+html,body{touch-action:manipulation;-webkit-text-size-adjust:100%;margin:0;height:100%;background:#1d2a33;color:#fff8e8;font-family:"LXGW WenKai TC",serif;overflow:hidden;user-select:none;-webkit-user-select:none}
 #app{max-width:440px;margin:0 auto;height:100%;height:100dvh;display:flex;flex-direction:column;padding:10px}
 h1{margin:0;font-size:18px;letter-spacing:2px;display:flex;align-items:center;gap:8px}
 h1 small{font-size:12px;color:#c9d6dc;font-weight:400}
@@ -16,8 +16,8 @@ h1 small{font-size:12px;color:#c9d6dc;font-weight:400}
 .target .hint{font-size:13px;color:#c9d6dc}
 .stat{margin-left:auto;text-align:right;font-size:13px;color:#c9d6dc}
 .stat b{color:#ffe39a;font-size:18px}
-#padWrap{position:relative;flex:1;min-height:0;margin-top:8px;display:flex;align-items:center;justify-content:center}
-#pad{background:#f7efdc;border-radius:14px;touch-action:none;box-shadow:0 4px 12px rgba(0,0,0,.4)}
+#padWrap{touch-action:none;position:relative;flex:1;min-height:0;margin-top:8px;display:flex;align-items:center;justify-content:center}
+#pad{-webkit-user-select:none;-webkit-touch-callout:none;background:#f7efdc;border-radius:14px;touch-action:none;box-shadow:0 4px 12px rgba(0,0,0,.4)}
 #grid{position:absolute;pointer-events:none}
 #tmpl{position:absolute;pointer-events:none}
 .res{margin-top:8px;min-height:78px;background:rgba(0,0,0,.25);border-radius:12px;padding:8px 10px}
@@ -220,5 +220,10 @@ $('bFile').onclick=async()=>{const txt=$('logTxt').value;const name='寫字測�
   try{if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file],title:name});return}}catch(e){if(e.name==='AbortError')return}
   try{const a=document.createElement('a');a.href=URL.createObjectURL(file);a.download=name;document.body.appendChild(a);a.click();a.remove();$('bFile').textContent='已下載'}catch(e){$('bFile').textContent='請改用複製'}};
 $('bReset').onclick=()=>{results=[];try{localStorage.removeItem('rt_log2')}catch(e){};stat();$('bLog').onclick()};
+// 防 iPhone 放大：寫字區的觸控一律不交給瀏覽器；整頁擋雙擊放大與縮放手勢
+['touchstart','touchmove','touchend'].forEach(ev=>$('padWrap').addEventListener(ev,e=>e.preventDefault(),{passive:false}));
+document.addEventListener('gesturestart',e=>e.preventDefault(),{passive:false});
+document.addEventListener('dblclick',e=>e.preventDefault(),{passive:false});
+let lastTouch=0;document.addEventListener('touchend',e=>{const n=Date.now();if(n-lastTouch<350)e.preventDefault();lastTouch=n},{passive:false});
 window.addEventListener('resize',size);size();next();stat();
 </script></body></html>
