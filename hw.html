@@ -13,14 +13,14 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#0e0d0b;ove
 #loading .fill{width:0;height:100%;background:#c4aa70;transition:width .2s}
 #loading .msg{font-size:16px;color:#b8a97c;min-height:1.6em;text-align:center;padding:0 24px}
 #loading .ver{position:absolute;bottom:calc(12px + env(safe-area-inset-bottom));font-size:12px;color:#6f664f}
-</style><link id="-gd-engine-icon" rel="icon" type="image/png" href="chuyao_202611231636_31e612a.icon.png" />
-<link rel="apple-touch-icon" href="chuyao_202611231636_31e612a.apple-touch-icon.png"/>
+</style><link id="-gd-engine-icon" rel="icon" type="image/png" href="chuyao_202611231720_399c3e4.icon.png" />
+<link rel="apple-touch-icon" href="chuyao_202611231720_399c3e4.apple-touch-icon.png"/>
 </head>
 <body><canvas id="canvas" tabindex="0">瀏覽器需支援 WebGL 2。</canvas>
 <div id="loading"><div class="title">初謠</div><div class="bar"><div class="fill" id="fill"></div></div><div class="msg" id="msg">載入中…</div><div class="ver" id="ver"></div></div>
-<script src="chuyao_202611231636_31e612a.js"></script>
+<script src="chuyao_202611231720_399c3e4.js"></script>
 <script>
-const BUILD_VERSION='2026-11-23 16:36 31e612a';
+const BUILD_VERSION='2026-11-23 17:20 399c3e4';
 const msg=document.getElementById('msg'),fill=document.getElementById('fill');
 document.getElementById('ver').textContent=BUILD_VERSION;
 // 防止手機瀏覽器的縮放、雙擊放大、下拉重新整理、長按選單。
@@ -41,7 +41,7 @@ async function versionOk(){
 }
 (async()=>{
  if(!await versionOk())return;
- const config={"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"chuyao_202611231636_31e612a","mainPack":"chuyao_hw_202611231636_31e612a.pck","experimentalVK":false,"fileSizes":{"chuyao_hw_202611231636_31e612a.pck":41606320,"chuyao_202611231636_31e612a.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+ const config={"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"chuyao_202611231720_399c3e4","mainPack":"chuyao_hw_202611231720_399c3e4.pck","experimentalVK":false,"fileSizes":{"chuyao_hw_202611231720_399c3e4.pck":41604464,"chuyao_202611231720_399c3e4.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
  const engine=new Engine(config);
  const missing=Engine.getMissingFeatures({threads:false});
  if(missing.length){msg.textContent='這個瀏覽器不支援遊戲所需功能（'+missing.join('、')+'）。請改用新版 Chrome 或 Safari。';return;}
