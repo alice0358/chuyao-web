@@ -1,2 +1,2 @@
-2026-11-24 22:41 cf81fa7
-工程 commit：cf81fa7　批次：G79 補：iPhone 輸入框搜尋與文楷字體
+2026-11-24 23:16 0e1cd4f
+工程 commit：0e1cd4f　批次：G79 補二：iPhone 搜尋送出
