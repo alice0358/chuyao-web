@@ -13,20 +13,23 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#0e0d0b;ove
 #loading .fill{width:0;height:100%;background:#c4aa70;transition:width .2s}
 #loading .msg{font-size:16px;color:#b8a97c;min-height:1.6em;text-align:center;padding:0 24px}
 #loading .ver{position:absolute;bottom:calc(12px + env(safe-area-inset-bottom));font-size:12px;color:#6f664f}
-</style><link id="-gd-engine-icon" rel="icon" type="image/png" href="chuyao_202611231959_5a1f47a.icon.png" />
-<link rel="apple-touch-icon" href="chuyao_202611231959_5a1f47a.apple-touch-icon.png"/>
+</style><link id="-gd-engine-icon" rel="icon" type="image/png" href="chuyao_202611241029_968d47d.icon.png" />
+<link rel="apple-touch-icon" href="chuyao_202611241029_968d47d.apple-touch-icon.png"/>
 </head>
 <body><canvas id="canvas" tabindex="0">瀏覽器需支援 WebGL 2。</canvas>
 <div id="loading"><div class="title">初謠</div><div class="bar"><div class="fill" id="fill"></div></div><div class="msg" id="msg">載入中…</div><div class="ver" id="ver"></div></div>
-<script src="chuyao_202611231959_5a1f47a.js"></script>
+<script src="chuyao_202611241029_968d47d.js"></script>
 <script>
-const BUILD_VERSION='2026-11-23 19:59 5a1f47a';
+const BUILD_VERSION='2026-11-24 10:29 968d47d';
 const msg=document.getElementById('msg'),fill=document.getElementById('fill');
 document.getElementById('ver').textContent=BUILD_VERSION;
 // 防止手機瀏覽器的縮放、雙擊放大、下拉重新整理、長按選單。
-for(const t of ['gesturestart','gesturechange','gestureend'])document.addEventListener(t,e=>e.preventDefault());
+for(const t of ['gesturestart','gesturechange','gestureend'])document.addEventListener(t,e=>e.preventDefault(),{passive:false});
 document.addEventListener('contextmenu',e=>e.preventDefault());
 document.addEventListener('touchmove',e=>{if(e.touches.length>1)e.preventDefault();},{passive:false});
+// G71：iPhone Safari 快速連點、寫點畫不放大（照原型測試頁）：擋 dblclick，兩次 touchend 間隔 <350ms 時擋預設動作（不擋事件本身，遊戲照收）。
+document.addEventListener('dblclick',e=>e.preventDefault(),{passive:false});
+let lastTouchEnd=0;document.addEventListener('touchend',e=>{const n=Date.now();if(n-lastTouchEnd<350)e.preventDefault();lastTouchEnd=n;},{passive:false});
 // 版本比對：GitHub Pages 會讓 index.html 被快取約 10 分鐘；發現舊頁就帶時間參數重新載入一次。
 async function versionOk(){
  try{
@@ -41,7 +44,7 @@ async function versionOk(){
 }
 (async()=>{
  if(!await versionOk())return;
- const config={"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"chuyao_202611231959_5a1f47a","experimentalVK":false,"fileSizes":{"chuyao_202611231959_5a1f47a.pck":62996532,"chuyao_202611231959_5a1f47a.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+ const config={"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"chuyao_202611241029_968d47d","experimentalVK":false,"fileSizes":{"chuyao_202611241029_968d47d.pck":68224368,"chuyao_202611241029_968d47d.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
  const engine=new Engine(config);
  const missing=Engine.getMissingFeatures({threads:false});
  if(missing.length){msg.textContent='這個瀏覽器不支援遊戲所需功能（'+missing.join('、')+'）。請改用新版 Chrome 或 Safari。';return;}
